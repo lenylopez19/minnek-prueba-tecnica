@@ -7,23 +7,40 @@
 
 html,
 body {
-  box-sizing: border-box;
   color: white;
   font-family: sans-serif;
 }
 
 body {
   background: #267782; 
-  background: -webkit-linear-gradient(to right, #d6a4a4, #dae2f8);
-  background: linear-gradient(to right, #d6a4a4, #dae2f8);
-  height: 100vh;
+  background: linear-gradient(-45deg, #ee7752, #bd7f3d, #23a6d5, #ab3ce7);
+	background-size: 400% 400%;
+
+	animation: gradient 35s ease-in-out infinite;
+	height: 100vh;
 }
+
+
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
 
 main {
   display: flex;
   justify-content: center;
   align-items: center;
   height: inherit;
+  overflow: auto;
 }
 
 #contentHolder {
@@ -53,7 +70,7 @@ main {
   height: 250px;
   object-fit: cover;
   object-position: top;
-  border-radius: 16px;
+  border-radius: 10px;
   transition: transform 0.2s ease-in-out, box-shadow 0.1s ease-in;
 }
 
