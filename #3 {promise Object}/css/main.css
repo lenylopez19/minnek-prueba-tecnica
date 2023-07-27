@@ -1,0 +1,177 @@
+*{
+    padding: 0;
+    margin:0;
+    box-sizing: border-box;
+}
+
+
+a{
+    color:rgb(251, 251, 46);
+    text-decoration-thickness: 5px;
+    /* text-decoration-thickness: .125em; */
+    text-underline-offset: 8px;
+}
+html{
+    height: 100vh;
+    font-family: sans-serif;
+    color:white;
+}
+body{
+   height: inherit;
+   
+	background: linear-gradient(-60deg, #03a2f1, #7341a8, #60309a, #1c4b8c);
+	background-size: 400% 400%;
+	animation: gradient 50s ease infinite;
+	height: 100vh;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+@keyframes pulse {
+    0%{
+        transform: scale(0.8);
+    }
+    50%{
+        transform: scale(1.05);
+    }
+    100%{
+        transform: scale(0.8)
+    }
+}
+
+@keyframes reversePulse {
+    0%{
+        transform: scale(1.05);
+    }
+    50%{
+        transform: scale(0.8);
+    }
+    100%{
+        transform: scale(1.05)
+    }
+}
+
+#createUserForm{
+    display: none;
+    opacity: 0;
+}
+#loginUserForm{
+    display: flex;
+}
+.form{
+    border:1px solid gray;
+    padding:2rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    max-width: 380px;
+    border-radius: 20px;
+    /* From https://css.glass */
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
+    border: 1px solid rgba(0, 0, 0, 0.29);
+    z-index: 10;
+    position: relative;
+
+    transition: transform .3s ease-in-out;
+    box-shadow: 4px 5px 1px rgba(0, 0, 0, 0.246);
+}
+
+
+.wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: inherit;
+   
+}
+
+.wrapper::before{
+    content:"";
+    width: 150px;
+    height: 150px;
+    /* border:1px solid rgb(147, 147, 147); */
+    border-radius: 50%;;
+    position:absolute;
+    background-color: rgb(177, 30, 165);
+    margin-bottom: 400px;
+    margin-left: -300px;
+    z-index: -1;
+    animation: pulse 20s ease-in-out infinite;
+}
+
+.wrapper::after{
+    content:"";
+    width: 150px;
+    height: 200px;
+
+    position:absolute;
+    background-color: rgb(98, 131, 223);
+    margin-bottom:-450px;
+    margin-left: 280px;
+    z-index: -1;
+    transform: rotate(15deg);
+    
+    animation: reversePulse 20s ease-in-out infinite;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"]{
+    padding: 10px;
+    font-size:1.2rem;
+    border-radius: 10px;
+    border:1px solid gray;
+    /* From https://css.glass */
+background: rgba(255, 255, 255, 0.46);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(8px);
+-webkit-backdrop-filter: blur(8px);
+/* border: 1px solid rgb(207, 207, 207); */
+border:none;
+
+}
+
+.regTitle{
+    text-align: center;
+    padding: 20px
+}
+
+label{
+    font-size:1.2rem;
+    margin: 10px 0;
+}
+
+
+
+
+.signInOption{
+    padding-top: 30px;
+}
+
+.submitButton{
+    max-width: 150px;
+    padding:10px;
+    margin:30px 0 0;
+    position: relative;
+    /* bottom: -45px; */
+    border-radius: 30px;
+    border:1px solid gray
+}
+.submitButton:hover{
+    cursor:pointer;
+}
