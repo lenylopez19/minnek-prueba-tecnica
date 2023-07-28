@@ -15,11 +15,12 @@
         <form class="form" id="createUserForm" action="">
             <h2 class="regTitle">Register</h2>
             <label for="user">User:</label>
-            <input type="text" name="user" placeholder="Jhon">
+            <input id= "createUserInput" class="inputData" type="text" name="user" placeholder="Jhon1985">
+            <span id="userErrMsj" class="errMsj"></span>
             <label for="password">Password:</label>
-            <input type="password" name="password" placeholder="pass">
+            <input id="createUserPassword" class="inputData" type="password" name="password" placeholder="pass">
             <label for="mail">Email:</label>
-            <input type="email" placeholder="jhon@mail.com">
+            <input id="createUserEmail"class="inputData"type="email" placeholder="jhon@mail.com">
             <h3 class="signInOption">Already have an account? <a id="signIn" href="">sign-in</a></h3>
             <button class="submitButton">Register</button>
         </form>
@@ -27,9 +28,9 @@
         <form class="form" id="loginUserForm" action="">
             <h2 class="regTitle">Login</h2>
             <label for="user">User:</label>
-            <input type="text" name="user" placeholder="Jhon">
+            <input id="loginUserInput"class="inputData" type="text" name="user" placeholder="Jhon1985">
             <label for="password">Password:</label>
-            <input type="password" name="password" placeholder="pass">
+            <input id="loginUserPassword"class="inputData" type="password" name="password" placeholder="pass">
             <h3 class="signInOption">Don't have an account? <a id="register" href="">Register</a></h3>
             <button class="submitButton">log-in</button>
         </form>
