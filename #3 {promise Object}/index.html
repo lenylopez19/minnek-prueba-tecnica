@@ -13,16 +13,22 @@
     <div class="wrapper">
         
         <form class="form" id="createUserForm" action="">
+            <div id="createUserFormMsj" class="formMsj">
+                <div class="formMsjIcon">✔️</div>
+                <div class="formMsjText">Done</div>
+            </div>
             <h2 class="regTitle">Register</h2>
             <label for="user">User:</label>
-            <input id= "createUserInput" class="inputData" type="text" name="user" placeholder="Jhon1985">
-            <span id="userErrMsj" class="errMsj"></span>
+            <input id= "createUser-input" class="inputData" type="text" name="user" placeholder="Jhon1985">
+            <span id="createUser-errMsj" class="errMsj"></span>
             <label for="password">Password:</label>
-            <input id="createUserPassword" class="inputData" type="password" name="password" placeholder="pass">
+            <input id="createUser-password" class="inputData" type="password" name="password" placeholder="pass">
+            <div id="createUserPassword-errMsj" class="errMsj"></div>
             <label for="mail">Email:</label>
-            <input id="createUserEmail"class="inputData"type="email" placeholder="jhon@mail.com">
+            <input id="createUser-Email"class="inputData"type="email" placeholder="jhon@mail.com">
+            <div id="createUserEmail-errMsj" class="errMsj"></div>
             <h3 class="signInOption">Already have an account? <a id="signIn" href="">sign-in</a></h3>
-            <button class="submitButton">Register</button>
+            <button id="createUserSubmit" class="submitButton">Register</button>
         </form>
 
         <form class="form" id="loginUserForm" action="">
