@@ -71,7 +71,7 @@ function renderDogs(dog, dogImageUrl, breedLimit) {
                   ${breedList}
             </ul>
         </div>
-        <img onerror="this.src='../assets/errorImg.jpeg'" id="IMG_${dogName}" src="${dogImageUrl}" class="dogImage" alt="${dogName}">
+        <img onerror="this.src='assets/errorImg.jpeg'" id="IMG_${dogName}" src="${dogImageUrl}" class="dogImage" alt="${dogName}">
         <h2 class="mainTitle">${dogName}</h2>
     </article>
     `;
