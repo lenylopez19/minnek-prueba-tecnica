@@ -1,95 +1,86 @@
-function getRamdonDog(numberOfDogs, limit) {
-  let randomDog = [];
+const API = "https://dog.ceo/api";
+const listAllDogs = "breeds/list/all";
 
-  for (let i = 0; i < limit; i++) {
-    const randomPosition = Math.floor(Math.random() * numberOfDogs - 1);
-    if (!randomDog.includes(randomPosition)) {
-      randomDog.push(randomPosition);
-    } else {
-      i--;
-    }
+function getRamdonDog(dogArr, maxDogs) {
+  let newDogArr = [];
+  let numberOfDogs = dogArr.length - 1;
+  for (let i = 0; i < maxDogs; i++) {
+    const randomDog = Math.round(Math.random() * numberOfDogs);
+
+    if (!newDogArr.includes(dogArr[randomDog]))
+      newDogArr.push(dogArr[randomDog]);
+    else i--;
   }
-  return randomDog;
+  return newDogArr;
 }
 
-function renderDogs(dogArr, limit) {
-  let newDogArr = [];
-  let cardItemHtml = "";
+const getDogs = async (numberOfDogs) => {
+  let result;
 
-  const randomDog = getRamdonDog(dogArr.length, limit);
-
-  for (let i = 0; i < limit; i++) {
-    newDogArr.push(dogArr[randomDog[i]]);
+  try {
+    result = await fetch(`${API}/${listAllDogs}`);
+  } catch {
+    console.error("something went wrong fetching the dogs info", err);
   }
 
-  for (dog of newDogArr) {
-    const breedExist = dog[1].length != 0;
-    let li = "";
+  if (result?.ok) {
+    const dataJson = await result.json();
+    const dogs = Object.entries(dataJson.message);
+    const dogsToDisplay = getRamdonDog(dogs, numberOfDogs);
 
-    if (breedExist) {
-      for (let i = 0; i < breedLimit; i++) {
-        if (dog[1][i] != undefined) {
-          li += `<li>${dog[1][i]}</li>`;
-        }
+    for (const dog of dogsToDisplay) {
+      const dogName = dog[0];
+      try {
+        result = await fetch(`${API}/breed/${dogName}/images/random`);
+      } catch (err) {
+        console.error("something went wrong fetching a dog image", err);
       }
-    } else {
-      li = "<li>no breed</>";
+      if (result?.ok) {
+        const dataJson = await result.json();
+        const dogImageUrl = dataJson.message;
+        renderDogs(dog, dogImageUrl, 3);
+      } else {
+        console.log(result?.status);
+      }
     }
+  } else {
+    console.log(`HTTP Response Code: ${result?.status}`);
+  }
+};
 
-    cardItemHtml += `
-    <article class="card">
+function renderDogs(dog, dogImageUrl, breedLimit) {
+  const breeds = dog[1];
+  const dogName = dog[0];
+  let breedList = "";
+
+  const breedExist = breeds.length;
+
+  if (breedExist) {
+    for (let i = 0; i < breeds.length; i++) {
+      if (i >= breedLimit) break;
+      breedList += `<li>${breeds[i]}</li>`;
+    }
+  } else {
+    breedList = `<li>no breed</li>`;
+  }
+
+  const htmlCard = `
+    <article id = "dog_${dogName}"class="card">
         <div class="sub-breed">
             <ul>
-              ${li}
+                  ${breedList}
             </ul>
         </div>
-        <img id="IMG_${dog[0]}" class="dogImage" alt="${dog[0]}">
-        <h2 class="mainTitle">${dog[0]}</h2>
+        <img onerror="this.src='../assets/errorImg.jpeg'" id="IMG_${dogName}" src="${dogImageUrl}" class="dogImage" alt="${dogName}">
+        <h2 class="mainTitle">${dogName}</h2>
     </article>
     `;
 
-    getDogImage(dog[0]);
-  }
+  document.getElementById("contentHolder").innerHTML += htmlCard;
 
-  document.getElementById("contentHolder").innerHTML = cardItemHtml;
+  setTimeout(() => {
+    document.getElementById(`dog_${dogName}`).style.opacity = 1;
+  }, 1000);
 }
 
-async function getDogImage(dog) {
-  const url = `https://dog.ceo/api/breed/${dog}/images/random`;
-  await fetch(url)
-    .then((res) => res.json())
-    .then((data) => {
-      const imgUrl = data.message;
-      const imgContainer = document.getElementById("IMG_" + dog);
-      imgContainer.src = imgUrl;
-    })
-    .then(() => {
-      const load = document.getElementById("contentHolder");
-      load.style.opacity = "1";
-    })
-    .catch((error) => {
-      showError(error);
-    });
-}
-
-function showError(err) {
-  const error = document.getElementById("errMsj");
-  error.textContent = err;
-}
-
-async function getDogs(url, limit) {
-  await fetch(url)
-    .then((res) => res.json())
-    .then((data) => {
-      const dogs = Object.entries(data.message);
-      renderDogs(dogs, limit);
-    })
-    .catch((error) => {
-      showError(error);
-    });
-}
-
-const url = "https://dog.ceo/api/breeds/list/all";
-const breedLimit = 3;
-
-getDogs(url, 8);
+getDogs(8);
