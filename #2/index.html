@@ -3,18 +3,41 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/png" href="https://dog.ceo/img/favicon.png">
+    <link rel="icon" type="image/png" href="https://dog.ceo/img/favicon.png" />
     <title>Prueba tecnica</title>
     <link rel="stylesheet" href="css/main.css" />
     <script src="js/engine.js" defer></script>
   </head>
   <body>
+
     <main>
-     <div id="errMsj"></div>
+      <nav class="topBar">
+        <div class="home">
+          <div class="logoHolder">
+            <img class="logo" src="assets/logo.png" alt="logo" />
+          </div>
+
+          <h1 class="title">DoggyDogs</h1>
+        </div>
+        <div class="searchBar">
+          <input
+            name="search"
+            id="searchDog"
+            type="text"
+            placeholder="Search"
+          />
+          <label for="searchDog">
+            <img class="searchIcon" src="assets/search.png" alt="" />
+          </label>
+        </div>
+      </nav>
+      <div class="loading">
+        <img src="assets/loading.png" alt="loading..." />
+        Loading...
+      </div>
+
       <div id="contentHolder" class="wrapper">
        
-
-        
       </div>
     </main>
   </body>
